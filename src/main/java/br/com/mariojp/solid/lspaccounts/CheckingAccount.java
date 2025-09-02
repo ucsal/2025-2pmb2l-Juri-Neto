@@ -1,9 +1,17 @@
 package br.com.mariojp.solid.lspaccounts;
 
-public class CheckingAccount extends Account {
-    @Override
+public class CheckingAccount extends Account implements Withdrawable{
+    
+	@Override
     public void withdraw(double amount) {
-        if(balance < amount) throw new IllegalArgumentException("Saldo insuficiente");
-        super.withdraw(amount);
+		
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Valor inválido");
+        }
+        if (amount > balance) {
+            throw new IllegalArgumentException("Saldo insuficiente");
+        }
+        balance -= amount;
+        
     }
 }
